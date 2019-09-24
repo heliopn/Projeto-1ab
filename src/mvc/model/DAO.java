@@ -12,13 +12,15 @@ public class DAO {
 	
 	private Connection connection = null;
 	public DAO() {
-		String url=System.getenv("mysql_url");
-		String user=System.getenv("mysql_user");
-		String password=System.getenv("mysql_password");
 		try {
-			connection = DriverManager.getConnection(
-			url, user, password);
-		} catch (SQLException e) {
+			String url = System.getenv("mysql_url");
+			String user = System.getenv("mysql_user");
+			String password = System.getenv("mysql_password");
+			
+			Class.forName("com.mysql.cj.jdbc.Driver");
+			connection = DriverManager.getConnection(url, user, password);
+
+		} catch (ClassNotFoundException | SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
